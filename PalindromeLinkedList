@@ -1,0 +1,106 @@
+public class PalindromeLinkedList {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null) {
+            //System.out.println("No list");
+            return false;
+        }
+        else {
+            int listCount = 0;
+            int equal = 0;
+            //Node tail;
+            ListNode temp = head;
+            while(temp.next != null) {
+                listCount++;
+                temp = temp.next;
+            }
+            listCount++;
+            //tail = temp;
+            temp = head;
+            ListNode headPoint = head;
+            ListNode point;
+            ListNode newTail = null;
+            if(listCount == 2) {
+                point = temp;
+                temp = temp.next;
+                if(point.val == temp.val) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else if(listCount == 3) {
+                point = temp;
+                temp = temp.next;
+                if(point.val == temp.next.val) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else if(listCount % 2 == 0) {
+                for(int i = 0; i < listCount / 2; i++) {
+                    temp = temp.next;
+                }
+
+                for(int j = 0; j < listCount / 2; j++) {
+                    point = temp;
+                    //System.out.println("HeadPoint: " + headPoint.data);
+                    while(point.next != null) {
+                        newTail = point;
+                        point = point.next;
+                    }
+                    //System.out.println("Point: " + point.data);
+                    if(point.val == headPoint.val) {
+                        //System.out.println("point.data: " + point.data + " headPoint.data: " + headPoint.data);
+                        equal = equal + 2;
+                    }
+                    else {
+                        return false;
+                    }
+                    headPoint = headPoint.next;
+                    newTail.next = null;
+                    //point = null;
+                }
+                if(listCount == equal) {
+                    return true;
+                }
+                //System.out.println("Not equal. Equal: " + equal);
+                return false;
+
+            }
+            else {
+                //System.out.println("Listcount odd: " + listCount);
+                for(int i = 0; i < listCount / 2 + 1; i++) {
+                    temp = temp.next;
+                }
+
+                for(int j = 0; j < listCount / 2; j++) {
+                    point = temp;
+                    //System.out.println("HeadPoint: " + headPoint.data);
+                    while(point.next != null) {
+                        newTail = point;
+                        point = point.next;
+                    }
+                    //System.out.println("Point: " + point.data);
+                    if(point.val == headPoint.val) {
+                        //System.out.println("point.data: " + point.data + " headPoint.data: " + headPoint.data);
+                        equal = equal + 2;
+                    }
+                    else {
+                        return false;
+                    }
+                    headPoint = headPoint.next;
+                    newTail.next = null;
+                    //point = null;
+                }
+                if(listCount == equal + 1) {
+                    return true;
+                }
+                //System.out.println("Not equal. Equal: " + equal);
+                return false;
+            }
+        }
+    }
+}
